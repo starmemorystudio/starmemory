@@ -1,0 +1,9 @@
+/Library
+.vscode/
+Logs/
+UserSettings/
+*sln
+*.csproj
+*.serprefs
+*.unityproj
+*DS.Store

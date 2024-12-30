@@ -1,0 +1,126 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Events;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
+
+public class dialogue : MonoBehaviour
+{
+    public string[] list;
+    
+    public Image image;
+    private InputControls inputControl;
+    private PlayerController playerController;
+    public GameObject player;
+    public TextMeshProUGUI npcNameTMP;
+    private string nameId;
+    private bool autoClose;
+    public string[] sentences;
+    public int page=-1;
+    public TextMeshProUGUI  conversationTMP;
+    private SpriteRenderer keyIcon;
+    public UnityAction<GameObject> onDialohue;
+    public Dictionary<string, Sprite>  sprites;
+
+
+    public bool Isonabled1;
+    public void RaiseEvent(GameObject go) {
+        
+     }
+    private void OnEnable()
+    {
+        inputControl.Enable();
+        
+
+    }
+    private void OnDisable()
+    {
+        inputControl.Disable();
+    }
+    private void Awake()
+    {
+        playerController=  player.GetComponent<PlayerController>();
+        inputControl = new InputControls();
+        
+        
+        //image = GetComponentInChildren<Image>();
+        //npcNameTMP = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        npcNameTMP.text = "1";
+        //conversationTMP = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+
+        inputControl.UI.Fire.started += NextPage;
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        gameObject.SetActive(false);
+    }
+    public void SetCoversation(Dictionary<string, Sprite> npcSprite, string stringId, bool autoClose) {
+
+        playerController.pause();
+
+        sprites = npcSprite;
+        string conversation = stringId.Replace(" ", "\n");
+        sentences = conversation.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+        page = 0;
+        list = (sentences[page]).Split(new[] { ":", "£º" }, StringSplitOptions.RemoveEmptyEntries);
+        conversationTMP.text = list[1];
+        npcNameTMP.text = list[0];
+        if (list[0] != " ") {
+        
+        image.sprite = sprites[list[0]];
+    }
+        this.autoClose = autoClose;
+
+        //if (sentences.Length > 1 || autoClose)
+            //keyIcon.gameObject.SetActive(true);
+        gameObject.SetActive(true);
+    }
+    // Update is called once per frame
+
+    public void NextPage(InputAction.CallbackContext context) {
+        
+        if (page < sentences.Length - 1)
+        {
+            page++;
+
+            if (sentences[page].IndexOf(":")==-1 && sentences[page].IndexOf("£º")==-1)
+                sentences[page] =" :"+ sentences[page];
+            list = (sentences[page]).Split(new[] { ":", "£º"}, StringSplitOptions.None);
+            conversationTMP.text = list[1];
+
+            if (list[0] != "")
+            {
+                npcNameTMP.text = list[0];
+                image.sprite = sprites[list[0]];
+            }
+            else {
+                npcNameTMP.text =" ";
+                 
+            }
+        }
+        else
+        {
+            gameObject.SetActive(false);
+            playerController.go();
+        }
+    }
+    public void talk() {
+        if (page < sentences.Length - 1||page==-1)
+        {
+            
+
+        }
+        
+    }
+    void Update()
+    {
+        //inputControl.UI.dialogue.started += NextPage;
+        
+    }
+}
