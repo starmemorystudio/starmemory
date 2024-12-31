@@ -34,10 +34,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8291798362761857166
 MonoBehaviour:
@@ -54,9 +54,9 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   sprite: {fileID: 569675702, guid: 11656970917819944a274c4e8df6ef72, type: 3}
   itemDetail:
-    id: 0
-    name: 
-    description: 
+    id: 10001
+    name: "\u8BB0\u5FC6\u5B9D\u77F3"
+    description: "\u6211\u80FD\u611F\u53D7\u5230\u5B83\u4FDD\u5B58\u4E86\u6211\u6D41\u5931\u7684\u8BB0\u5FC6"
     itemType: 0
   itemList: {fileID: 11400000, guid: dd050151cf99e3045807c75bcd3777f5, type: 2}
   itemId: 10001

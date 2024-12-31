@@ -58,7 +58,17 @@ public class InventoryManager : MonoBehaviour
 
         //itemnew.transform.localPosition=new Vector3(0,0,0);
         itemnew.transform.gameObject.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
-        //itemnew.transform.localScale=item.transform.localScale;
+
+        RectTransform rect = itemnew.GetComponent<RectTransform>();
+        rect.localScale = Vector3.one;
+        rect.anchorMax = new Vector2(1, 1);
+
+        rect.anchorMin = new Vector2(0, 0);
+        rect.offsetMax =Vector2.zero ;
+        rect.offsetMin = Vector2.zero;
+
+        rect.ForceUpdateRectTransforms();
+
 
         //rect(itemnew.GetComponent<RectTransform>());
         //itemNum++;
