@@ -105,7 +105,7 @@ public class npc1 : MonoBehaviour
             if (!spritedic.ContainsKey("村长"))
                 spritedic.Add("村长", sprites[1]);
             //SetActive(true);
-            dialogue1.SetCoversation(spritedic,text1, false);
+            dialogue.instance.SetCoversation(spritedic,text1, false);
             dialogueSO.onEventRaised += talkover;
  
         }

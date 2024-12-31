@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+using UnityEditor;
 
 public class dialogue : MonoBehaviour
 {
@@ -94,7 +95,29 @@ public class dialogue : MonoBehaviour
         gameObject.SetActive(true);
     }
     // Update is called once per frame
+    public void SetCoversation( string stringId, bool autoClose)
+    {
 
+        playerController.pause();
+        sprites  = ((SpriteList)AssetDatabase.LoadAssetAtPath<ScriptableObject>("Assets/setting/SpriteList.asset")).spritedic;
+        
+        string conversation = stringId.Replace(" ", "\n");
+        sentences = conversation.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+        page = 0;
+        list = (sentences[page]).Split(new[] { ":", "£º" }, StringSplitOptions.RemoveEmptyEntries);
+        conversationTMP.text = list[1];
+        npcNameTMP.text = list[0];
+        if (list[0] != " ")
+        {
+
+            image.sprite = sprites[list[0]];
+        }
+        this.autoClose = autoClose;
+
+        //if (sentences.Length > 1 || autoClose)
+        //keyIcon.gameObject.SetActive(true);
+        gameObject.SetActive(true);
+    }
     public void NextPage(InputAction.CallbackContext context) {
         
         if (page < sentences.Length - 1)

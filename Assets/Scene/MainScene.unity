@@ -52434,6 +52434,7 @@ MonoBehaviour:
   sprites:
   - {fileID: -487363210, guid: d6c20b3620cc7d445801e39f5c6b2c9a, type: 3}
   - {fileID: 1729680659, guid: 799ef321bf03eca44a635559037c9956, type: 3}
+  - {fileID: -487363210, guid: d6c20b3620cc7d445801e39f5c6b2c9a, type: 3}
   prefab: {fileID: 1065574610755635324, guid: 032beb57e75ee9347b34d13eb80aefa6, type: 3}
   dialogueSO: {fileID: 11400000, guid: a8f53c9907b39254a8435cfbdce96183, type: 2}
 --- !u!61 &1014068706

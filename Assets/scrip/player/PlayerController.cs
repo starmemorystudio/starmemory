@@ -42,7 +42,11 @@ public class PlayerController : MonoBehaviour
     {
                 
 
-        try { Debug.Log(InventoryManager.instance.thisobject.GetComponentInChildren<Item>().itemDetail.description); }
+        try {
+            string text = InventoryManager.instance.thisobject.GetComponentInChildren<Item>().itemDetail.description;
+            Debug.Log(text);
+            dialogue.instance.SetCoversation("ÐÇÔ¸£º" + text,false);
+        }
 
         catch (Exception)
         {
