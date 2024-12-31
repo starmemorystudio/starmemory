@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +26,8 @@ public class npc1 : MonoBehaviour
     public Sprite[] sprites;
 
     public GameObject prefab;
-    
-   
+
+    public voidEventSO dialogueSO;
 
     void Start()
     {
@@ -42,9 +43,19 @@ public class npc1 : MonoBehaviour
         canPress = false;
         npc1Sprite.SetActive(false);
 
-
+        
         
     }
+
+    private void talkover()
+    {
+        GameObject item = Instantiate(prefab);
+
+        InventoryManager.instance.addItem(item.GetComponent<Item>());
+        Destroy(item);
+        dialogueSO.onEventRaised -= talkover;
+    }
+
     // Update is called once per frame
     private void OnEnable()
     {
@@ -95,11 +106,8 @@ public class npc1 : MonoBehaviour
                 spritedic.Add("´å³¤", sprites[1]);
             //SetActive(true);
             dialogue1.SetCoversation(spritedic,text1, false);
-
-            GameObject item = Instantiate(prefab);
-
-            InventoryManager.instance.addItem(item.GetComponent<Item>());
-            Destroy(item);
+            dialogueSO.onEventRaised += talkover;
+ 
         }
     }
     void Update()

@@ -51966,7 +51966,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.2755127, y: -348.30084}
+  m_AnchoredPosition: {x: -1.2753906, y: -348.30078}
   m_SizeDelta: {x: 643.48, y: -402.0269}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1013631880
@@ -52146,6 +52146,7 @@ MonoBehaviour:
   - {fileID: -487363210, guid: d6c20b3620cc7d445801e39f5c6b2c9a, type: 3}
   - {fileID: 1729680659, guid: 799ef321bf03eca44a635559037c9956, type: 3}
   prefab: {fileID: 1065574610755635324, guid: 032beb57e75ee9347b34d13eb80aefa6, type: 3}
+  dialogueSO: {fileID: 11400000, guid: a8f53c9907b39254a8435cfbdce96183, type: 2}
 --- !u!61 &1014068706
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -53455,6 +53456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   list: []
+  dialogueSO: {fileID: 11400000, guid: a8f53c9907b39254a8435cfbdce96183, type: 2}
   image: {fileID: 1608731737}
   player: {fileID: 600226007}
   npcNameTMP: {fileID: 362368771}

@@ -11,8 +11,11 @@ using UnityEngine.UI;
 
 public class dialogue : MonoBehaviour
 {
+    public static dialogue instance;
     public string[] list;
-    
+
+    public voidEventSO dialogueSO;
+
     public Image image;
     private InputControls inputControl;
     private PlayerController playerController;
@@ -44,7 +47,16 @@ public class dialogue : MonoBehaviour
     }
     private void Awake()
     {
-        playerController=  player.GetComponent<PlayerController>();
+        if(instance == null)
+            instance = this;
+        else
+        {
+            Destroy(instance);
+        }
+
+
+
+        playerController =  player.GetComponent<PlayerController>();
         inputControl = new InputControls();
         
         
@@ -107,6 +119,7 @@ public class dialogue : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
+            dialogueSO.onEventRaised?.Invoke();
             playerController.go();
         }
     }
