@@ -33,8 +33,22 @@ public class PlayerController : MonoBehaviour
         qipaoanimation = GetComponentInChildren<qiPaoanimation>();
         inputControl.Player.jump.started += jump;
         inputControl.Player.Love.started += Love;
+        inputControl.Player.ItemUse.started += ItemUse;
         inputControl.UI.inventory.started += inventoryChange;
         //died_img.SetActive(false);
+    }
+
+    private void ItemUse(InputAction.CallbackContext context)
+    {
+                
+
+        try { Debug.Log(InventoryManager.instance.thisobject.GetComponentInChildren<Item>().itemDetail.description); }
+
+        catch (Exception)
+        {
+
+            Debug.Log("这个位置没有物品");
+        }
     }
 
     private void inventoryChange(InputAction.CallbackContext context)

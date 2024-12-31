@@ -46,8 +46,9 @@ public class InventoryManager : MonoBehaviour
     }
     public void addItem(GameObject prefab) {
         int itemNum=0;
-        foreach (var item in items) {
-            if (item.GetComponentInChildren<Item>() != null) itemNum=(itemNum+1)%8;
+        while(itemNum<8) {
+            if (items[itemNum].GetComponentInChildren<Item>() != null) itemNum = (itemNum + 1);
+            else break;
         }
         
         
@@ -130,6 +131,7 @@ public class InventoryManager : MonoBehaviour
 
     }
 
+    
     // Update is called once per frame
     void Update()
     {

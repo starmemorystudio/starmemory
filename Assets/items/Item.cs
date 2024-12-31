@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Services.Analytics;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -16,7 +17,13 @@ public class Item : MonoBehaviour
     public ItemDetails itemDetail;
     public SO_ItemList itemList;
     public int itemId;
-    
+    public bool isover;
+
+    public void OnPointDown()
+    {
+        Debug.Log(this.itemDetail.description);
+    }
+
     private void Awake()
     {
 
