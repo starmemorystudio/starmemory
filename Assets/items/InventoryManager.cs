@@ -21,11 +21,12 @@ public class InventoryManager : MonoBehaviour
     //ÎïÆ·À¸×ø±ê
     public int index;
     public GameObject thisobject;
-    public GameObject prfab;
+    
+    //public GameObject prefab;
     GameObject prfab1;
     void Awake() {
         index = 0;
-
+        //itemNum = 0;
         if (instance == null)
             instance = this;
         else
@@ -43,28 +44,52 @@ public class InventoryManager : MonoBehaviour
             
         }
     }
-    public void addItem(Item item) {
-        int i = inventoryItems.Count;
+    public void addItem(GameObject prefab) {
+        int itemNum=0;
+        foreach (var item in items) {
+            if (item.GetComponentInChildren<Item>() != null) itemNum=(itemNum+1)%8;
+        }
+        
+        
+        GameObject itemnew = Instantiate(prefab);
+        itemnew.transform.parent= items[itemNum].transform;
 
-        
-        inventoryItems.Add(item);
-        GameObject itemnew = new GameObject();
-        itemnew.transform.parent= items[i].transform;
-        
-        
-        itemnew.AddComponent<UnityEngine.UI.Image>().sprite = item.sprite;
-        itemnew.transform.localPosition=new Vector3(0,0,0);
+
+
+        //itemnew.transform.localPosition=new Vector3(0,0,0);
         itemnew.transform.gameObject.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
         //itemnew.transform.localScale=item.transform.localScale;
 
+        //rect(itemnew.GetComponent<RectTransform>());
+        //itemNum++;
 
-        itemnew.AddComponent<Item>().itemId = item.itemId;
 
 
-        Debug.Log(item.itemDetail.name);
-        itemnew.name = item.itemDetail.name;
+
+        itemnew.name = itemnew.GetComponent<Item>().itemDetail.name;
         
         //itemnew.name = "fuvk";
+
+    }
+
+    public void rect(RectTransform rectTransform) {
+        rectTransform = GetComponent<RectTransform>();
+
+        rectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 0, 0);
+
+        rectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0, 0);
+
+        rectTransform.anchorMax = new Vector2(1, 1);
+
+        rectTransform.anchorMin = new Vector2(0, 0);
+
+        rectTransform.pivot = new Vector2(0.5f, 0.5f);
+
+        rectTransform.localScale = new Vector3(1, 1, 1);
+
+        rectTransform.localPosition = new Vector3(0, 0, 0);
+
+        rectTransform.localEulerAngles = new Vector3(0, 0, 0);
 
     }
 

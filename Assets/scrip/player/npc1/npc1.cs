@@ -49,10 +49,10 @@ public class npc1 : MonoBehaviour
 
     private void talkover()
     {
-        GameObject item = Instantiate(prefab);
+       
 
-        InventoryManager.instance.addItem(item.GetComponent<Item>());
-        Destroy(item);
+        InventoryManager.instance.addItem(prefab);
+        
         dialogueSO.onEventRaised -= talkover;
     }
 
