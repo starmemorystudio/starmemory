@@ -57,7 +57,17 @@ public class PlayerController : MonoBehaviour
 
     private void inventoryChange(InputAction.CallbackContext context)
     {
+        int number=0;
+        do{
         InventoryManager.instance.index +=(int)inputControl.UI.inventory.ReadValue<float>();
+        
+        if(InventoryManager.instance.index<0){
+            InventoryManager.instance.index+=8;
+        }
+        InventoryManager.instance.index%=8;
+        number++;
+        }
+        while(!InventoryManager.instance.items[InventoryManager.instance.index].GetComponentInChildren<Item>()||number>8);
     }
 
     IEnumerable OnWaitMethod()

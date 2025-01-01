@@ -135,12 +135,15 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (index < 0) index += 8;
-        index = index % 8;
         
-        thisobject = items[index];
+
+            thisobject = items[index];
+
+        
+        
         for (int i = 0; i < 8; i++)
-            items[i].transform.GetChild(0).transform.gameObject.SetActive((i == index) );
+            
+            items[i].transform.GetChild(0).transform.gameObject.SetActive((i == index)&&items[i].GetComponentInChildren<Item>() );
 
         
         
