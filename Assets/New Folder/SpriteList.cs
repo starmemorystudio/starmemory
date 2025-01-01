@@ -8,4 +8,6 @@ public class SpriteList : SerializedScriptableObject
 {
     // Start is called before the first frame update
     public Dictionary<string, Sprite> spritedic;
+    // public List<>;
+
 }

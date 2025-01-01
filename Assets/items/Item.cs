@@ -24,6 +24,7 @@ public class Item : MonoBehaviour
         Debug.Log(this.itemDetail.description);
     }
 
+
     private void Awake()
     {
 
