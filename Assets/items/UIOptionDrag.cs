@@ -26,23 +26,29 @@ public class UIOptionDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         m_originPos = m_rt.position;
     }
     Vector3 tWorldPos;
+    int sortcache;
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
-        {
+        // if (eventData.button == PointerEventData.InputButton.Left)
+        // {
             // 存储点击时的鼠标坐标
-            
+            isdown=false;
             //UI屏幕坐标转换为世界坐标
             RectTransformUtility.ScreenPointToWorldPointInRectangle(m_rt, eventData.position, eventData.pressEventCamera, out tWorldPos);
             //计算偏移量   
             m_originPos = m_rt.position;
             m_offset = transform.position - tWorldPos;
-        }
+        // }
     }
- 
+    Transform lastparent;
     public void OnDrag(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
+            // sortcache=m_rt.GetComponent<Canvas>().sortingOrder;
+            // m_rt.GetComponent<Canvas>().sortingOrder=100;
+            lastparent=m_rt.parent;
+            m_rt.parent=TargetLocations[7];
+            m_rt.gameObject.layer=LayerMask.NameToLayer("ground");
+        // if (eventData.button == PointerEventData.InputButton.Left)
             m_rt.position = Input.mousePosition + m_offset;
     }
     public int parent1;
@@ -53,13 +59,31 @@ public class UIOptionDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             m_rt.position = m_originPos;
             //m_originPos = m_rt.position;
         }else{
+            //如果原位有物品
             if(TargetLocations[parent1].gameObject.GetComponentInChildren<Item>()){
-            olditem.parent=m_rt.parent;}
+                //如果是左键拖拽，替换
+                if (eventData.button == PointerEventData.InputButton.Left){
+                
+                    olditem.position=lastparent.position;
+                     olditem.parent=lastparent;
+                    
+                    }
+                else if (eventData.button == PointerEventData.InputButton.Right){
+                        //右键拖拽合成
+                        olditem.parent=lastparent;
+                        Debug.Log("合成成功!");
+                    }
+            }
+            m_rt.position = TargetLocations[parent1].position;
             m_rt.parent =TargetLocations[parent1];
             
-        }
+            }
+            isdown=true;
+            // m_rt.GetComponent<Canvas>().sortingOrder=sortcache;
+            m_rt.gameObject.layer=LayerMask.NameToLayer("UI");
     }
     Transform olditem;
+    bool isdown=false;
     void Update()
     {
         for (int i = 0; i < TargetLocations.Count ; i++)
@@ -69,32 +93,24 @@ public class UIOptionDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                 
                 if(TargetLocations[i].gameObject.GetComponentInChildren<Item>()){
                     olditem=TargetLocations[i].GetChild(1);
-                    olditem.position=m_rt.parent.position;
-                    
-
-                    
-
-                    
 
 
                 }
                     parent1=i;
-                    m_rt.position = TargetLocations[i].position;
+                    
                     
                     
                     
 
                     isAdsorbed = true;
-                    
-                
-
-                
-
+                    //isdown=false;
                 
                 break;
             }
-            else
+            else{
                 isAdsorbed = false;
+                
+            }
         }
     }
 }

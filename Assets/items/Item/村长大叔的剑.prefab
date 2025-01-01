@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6359633484309412360}
   - component: {fileID: -655694034294994667}
   - component: {fileID: 4664956271576496526}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: "\u6751\u957F\u5927\u53D4\u7684\u5251"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,3 +142,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetLocations: []
+  parent1: 0

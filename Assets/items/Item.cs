@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using Unity.Services.Analytics;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -21,7 +22,7 @@ public class Item : MonoBehaviour
 
     public void OnPointDown()
     {
-        Debug.Log(this.itemDetail.description);
+       // Debug.Log(this.itemDetail.description);
     }
 
 
@@ -29,7 +30,8 @@ public class Item : MonoBehaviour
     {
 
         
-        //spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         itemList = (SO_ItemList)AssetDatabase.LoadAssetAtPath<ScriptableObject>("Assets/items/so_ItemList.asset");
         foreach (var itemdetail in itemList.itemDetails)
         {
