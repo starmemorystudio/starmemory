@@ -38,14 +38,15 @@ public class UIOptionDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             //计算偏移量   
             m_originPos = m_rt.position;
             m_offset = transform.position - tWorldPos;
+            lastparent=m_rt.parent;
         // }
     }
-    Transform lastparent;
+    public Transform lastparent;
     public void OnDrag(PointerEventData eventData)
     {
             // sortcache=m_rt.GetComponent<Canvas>().sortingOrder;
             // m_rt.GetComponent<Canvas>().sortingOrder=100;
-            lastparent=m_rt.parent;
+            
             m_rt.SetParent(TargetLocations[7]);
             //m_rt.gameObject.layer=LayerMask.NameToLayer("ground");
         // if (eventData.button == PointerEventData.InputButton.Left)
@@ -57,20 +58,23 @@ public class UIOptionDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         if (!isAdsorbed)
         {
             m_rt.position = m_originPos;
+            m_rt.SetParent(lastparent);
             //m_originPos = m_rt.position;
         }else{
+            
             //如果原位有物品
             if(TargetLocations[parent1].gameObject.GetComponentInChildren<Item>()){
                 //如果是左键拖拽，替换
+                
                 if (eventData.button == PointerEventData.InputButton.Left){
                 
                     olditem.position=lastparent.position;
-                     olditem.parent=lastparent;
+                     olditem.SetParent(lastparent);
                     
                     }
                 else if (eventData.button == PointerEventData.InputButton.Right){
                         //右键拖拽合成
-                        olditem.parent=lastparent;
+                        olditem.SetParent(lastparent);
                         Debug.Log("合成成功!");
                     }
             }
@@ -81,6 +85,7 @@ public class UIOptionDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             isdown=true;
             // m_rt.GetComponent<Canvas>().sortingOrder=sortcache;
             m_rt.gameObject.layer=LayerMask.NameToLayer("UI");
+            olditem=null;
     }
     Transform olditem;
     bool isdown=false;
@@ -88,7 +93,7 @@ public class UIOptionDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     {
         for (int i = 0; i < TargetLocations.Count ; i++)
         {
-            if (Mathf.Sqrt((m_rt.position - TargetLocations[i].position).magnitude) < 5)
+            if (Mathf.Sqrt((m_rt.position - TargetLocations[i].position).magnitude) < 3)
             {
                 
                 if(TargetLocations[i].gameObject.GetComponentInChildren<Item>()){
