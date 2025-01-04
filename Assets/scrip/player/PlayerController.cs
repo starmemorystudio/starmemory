@@ -16,11 +16,11 @@ public class PlayerController : MonoBehaviour
     private PhysicCheck check;
     private Animator animator;
     private qiPaoanimation qipaoanimation;
-    [Header("基本参数")]
+    [Header("锟斤拷锟斤拷锟斤拷锟斤拷")]
     public float speed=290;
     public float jumpForce;
     public GameObject died_img;
-    [Header("记录数据")]
+    [Header("锟斤拷录锟斤拷锟斤拷")]
     public int died_times=0; 
     // Start is called before the first frame update
     private void Awake()
@@ -45,13 +45,13 @@ public class PlayerController : MonoBehaviour
         try {
             string text = InventoryManager.instance.thisobject.GetComponentInChildren<Item>().itemDetail.description;
             Debug.Log(text);
-            dialogue.instance.SetCoversation("星愿：" + text,false);
+            dialogue.instance.SetCoversation("鏄熸効:" + text,false);
         }
 
         catch (Exception)
         {
 
-            Debug.Log("这个位置没有物品");
+            Debug.Log("杩欓噷娌℃湁鐗╁搧");
         }
     }
 
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Vector3 vector3 = new Vector3(-17,-5,0);
+        Vector3 vector3 = new Vector3(15,-170,0);
         vector3.y = -5;
         
         if (transform.position.y < -100)

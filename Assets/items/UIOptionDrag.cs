@@ -46,8 +46,8 @@ public class UIOptionDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             // sortcache=m_rt.GetComponent<Canvas>().sortingOrder;
             // m_rt.GetComponent<Canvas>().sortingOrder=100;
             lastparent=m_rt.parent;
-            m_rt.parent=TargetLocations[7];
-            m_rt.gameObject.layer=LayerMask.NameToLayer("ground");
+            m_rt.SetParent(TargetLocations[7]);
+            //m_rt.gameObject.layer=LayerMask.NameToLayer("ground");
         // if (eventData.button == PointerEventData.InputButton.Left)
             m_rt.position = Input.mousePosition + m_offset;
     }
@@ -75,7 +75,7 @@ public class UIOptionDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                     }
             }
             m_rt.position = TargetLocations[parent1].position;
-            m_rt.parent =TargetLocations[parent1];
+            m_rt.SetParent(TargetLocations[parent1]);
             
             }
             isdown=true;

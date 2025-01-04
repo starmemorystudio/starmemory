@@ -81,7 +81,7 @@ public class dialogue : MonoBehaviour
         string conversation = stringId.Replace(" ", "\n");
         sentences = conversation.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
         page = 0;
-        list = (sentences[page]).Split(new[] { ":", "£º" }, StringSplitOptions.RemoveEmptyEntries);
+        list = (sentences[page]).Split(new[] { ":", "ï¼š" }, StringSplitOptions.RemoveEmptyEntries);
         conversationTMP.text = list[1];
         npcNameTMP.text = list[0];
         if (list[0] != " ") {
@@ -104,7 +104,7 @@ public class dialogue : MonoBehaviour
         string conversation = stringId.Replace(" ", "\n");
         sentences = conversation.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
         page = 0;
-        list = (sentences[page]).Split(new[] { ":", "£º" }, StringSplitOptions.RemoveEmptyEntries);
+        list = (sentences[page]).Split(new[] { ":", "ï¼š" }, StringSplitOptions.RemoveEmptyEntries);
         conversationTMP.text = list[1];
         npcNameTMP.text = list[0];
         if (list[0] != " ")
@@ -124,9 +124,9 @@ public class dialogue : MonoBehaviour
         {
             page++;
 
-            if (sentences[page].IndexOf(":")==-1 && sentences[page].IndexOf("£º")==-1)
+            if (sentences[page].IndexOf(":")==-1 && sentences[page].IndexOf("ï¼š")==-1)
                 sentences[page] =" :"+ sentences[page];
-            list = (sentences[page]).Split(new[] { ":", "£º"}, StringSplitOptions.None);
+            list = (sentences[page]).Split(new[] { ":", "ï¼š"}, StringSplitOptions.None);
             conversationTMP.text = list[1];
 
             if (list[0] != "")
