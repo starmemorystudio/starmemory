@@ -9,8 +9,10 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using UnityEngine.Windows;
 
-public class Item : MonoBehaviour
+public class Item : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField]
     
@@ -68,6 +70,37 @@ public GameObject LoadPrefabRuntime(string prefabName)
     {
 
     }
+
+    public void resolve(PointerEventData eventData){
+        
+        if(eventData.button==PointerEventData.InputButton.Right){
+        if(this.itemDetail.itemType==Enums.ItemType.component){
+        Transform olditem1=this.transform;
+        int id1=this.itemDetail.itemId1;
+        int id2=this.itemDetail.itemId2;
+        ItemDetails newItemDetail1=new ItemDetails();
+        ItemDetails newItemDetail2=new ItemDetails();
+        foreach (var itemdetail in olditem1.GetComponent<Item>().itemList.itemDetails)
+        {
+            if (itemdetail.id == id1)
+            {
+                newItemDetail1 = itemdetail;
+            }
+            else if (itemdetail.id == id2)
+            {
+                newItemDetail2 = itemdetail;
+            }
+        }
+        GameObject prefab1 = (GameObject)AssetDatabase.LoadAssetAtPath<GameObject>("Assets/items/Item/"+newItemDetail1.name+".prefab");
+        GameObject prefab2 = (GameObject)AssetDatabase.LoadAssetAtPath<GameObject>("Assets/items/Item/"+newItemDetail2.name+".prefab");
+        Destroy(olditem1.gameObject);
+        InventoryManager.instance.addItem(prefab1);
+        InventoryManager.instance.addItem(prefab2);
+        }else{
+            Debug.Log("该物品无法分解");
+        }
+    }
+    }
     private void Update()
     {
         foreach (var itemdetail in itemList.itemDetails)
@@ -104,5 +137,10 @@ Vector3 tWorldPos;
         rect.localPosition=new Vector3(0,-270,0);
         rect.transform.gameObject.SetActive(false);
 
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        resolve(eventData);
     }
 }

@@ -1,5 +1,9 @@
 
+using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
  
@@ -75,7 +79,14 @@ public class UIOptionDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                 else if (eventData.button == PointerEventData.InputButton.Right){
                         //右键拖拽合成
                         olditem.SetParent(lastparent);
-                        Debug.Log("合成成功!");
+                        if(olditem.GetComponent<Item>().itemDetail.itemType==m_rt.GetComponent<Item>().itemDetail.itemType&&m_rt.GetComponent<Item>().itemDetail.itemType==Enums.ItemType.star)
+                        {
+                            Compound(olditem,m_rt);
+                            Debug.Log("合成成功!");
+                        }else{
+                            Debug.Log("包含无法合成物品！");
+                        }
+
                     }
             }
             m_rt.position = TargetLocations[parent1].position;
@@ -87,6 +98,26 @@ public class UIOptionDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             m_rt.gameObject.layer=LayerMask.NameToLayer("UI");
             olditem=null;
     }
+
+    private void Compound(Transform olditem1, RectTransform olditem2)
+    {
+        int newid=olditem1.GetComponent<Item>().itemDetail.id*olditem2.GetComponent<Item>().itemDetail.id;
+        ItemDetails newItemDetail=new ItemDetails();
+        foreach (var itemdetail in olditem1.GetComponent<Item>().itemList.itemDetails)
+        {
+            if (itemdetail.id == newid)
+            {
+                newItemDetail = itemdetail;
+            }
+        }
+        
+        GameObject prefab = (GameObject)AssetDatabase.LoadAssetAtPath<GameObject>("Assets/items/Item/"+newItemDetail.name+".prefab");
+        Debug.Log("Assets/items/Item/"+newItemDetail.name+".prefab");
+        Destroy(olditem.gameObject);Destroy(olditem2.gameObject);
+        InventoryManager.instance.addItem(prefab);
+    }
+    
+
     Transform olditem;
     bool isdown=false;
     void Update()

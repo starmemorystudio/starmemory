@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -655694034294994667}
   - component: {fileID: 4664956271576496526}
   m_Layer: 5
-  m_Name: "\u6751\u957F\u5927\u53D4\u7684\u5251"
+  m_Name: "\u653B\u51FB\u5B9D\u77F3"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,8 +59,10 @@ MonoBehaviour:
     name: 
     description: 
     itemType: 0
+    itemId1: 0
+    itemId2: 0
   itemList: {fileID: 11400000, guid: dd050151cf99e3045807c75bcd3777f5, type: 2}
-  itemId: 1002
+  itemId: 1003002
   isover: 0
   descriptionPrefab: {fileID: 5791288974583399370, guid: 5d5dacfc94ffe774f8ac391062426960, type: 3}
 --- !u!222 &8024783225525844741
@@ -119,9 +121,9 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 8291798362761857166}
-          m_TargetAssemblyTypeName: Item, Assembly-CSharp
-          m_MethodName: OnPointDown
-          m_Mode: 1
+          m_TargetAssemblyTypeName: UnityEngine.MonoBehaviour, UnityEngine
+          m_MethodName: CancelInvoke
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

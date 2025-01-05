@@ -60,7 +60,7 @@ MonoBehaviour:
     description: "\u6211\u80FD\u611F\u53D7\u5230\u5B83\u4FDD\u5B58\u4E86\u6211\u6D41\u5931\u7684\u8BB0\u5FC6"
     itemType: 0
   itemList: {fileID: 11400000, guid: dd050151cf99e3045807c75bcd3777f5, type: 2}
-  itemId: 10001
+  itemId: 1001
   isover: 0
   descriptionPrefab: {fileID: 5791288974583399370, guid: 5d5dacfc94ffe774f8ac391062426960, type: 3}
 --- !u!222 &8024783225525844741
@@ -175,4 +175,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetLocations: []
+  lastparent: {fileID: 0}
   parent1: 0

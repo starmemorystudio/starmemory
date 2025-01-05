@@ -8,7 +8,8 @@ public class Enums
     public enum ItemType
     {
         star,
-        npc
+        npc,
+        component
     }
     public enum InventoryLocation {
         player,

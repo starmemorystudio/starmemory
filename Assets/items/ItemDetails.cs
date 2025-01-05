@@ -11,4 +11,7 @@ public class ItemDetails
     public string description;
     public ItemType itemType;
     
+    public int itemId1;
+    public int itemId2;
+    
 }
