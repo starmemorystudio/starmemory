@@ -58,7 +58,7 @@ MonoBehaviour:
     id: 1002
     name: 
     description: 
-    itemType: 2
+    itemType: 0
     itemId1: 0
     itemId2: 0
   itemList: {fileID: 11400000, guid: dd050151cf99e3045807c75bcd3777f5, type: 2}
