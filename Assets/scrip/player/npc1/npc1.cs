@@ -26,7 +26,7 @@ public class npc1 : MonoBehaviour
     public Sprite[] sprites;
 
     public GameObject prefab;
-
+    public SpriteList spriteList;
     public voidEventSO dialogueSO;
 
     void Start()
@@ -36,6 +36,8 @@ public class npc1 : MonoBehaviour
     private void Awake()
     {
         spritedic = new Dictionary<string, Sprite>();
+        spriteList=UnityEditor.AssetDatabase.LoadAssetAtPath<SpriteList>("Assets/setting/SpriteList.asset");
+        spritedic=spriteList.spritedic;
         controls1=new InputControls();
         controls1.UI.talk.started += talk;
         anim =npc1Sprite.GetComponent<Animator>();
@@ -100,10 +102,10 @@ public class npc1 : MonoBehaviour
             canPress = false;
             //Debug.Log("talk");
             canvas.SetActive(true);
-            if (!spritedic.ContainsKey("星愿"))
-                spritedic.Add("星愿",sprites[0]);
-            if (!spritedic.ContainsKey("村长"))
-                spritedic.Add("村长", sprites[1]);
+            if (!spritedic.ContainsKey("鏄熸効"))
+                spritedic.Add("鏄熸効",sprites[0]);
+            if (!spritedic.ContainsKey("鏉戦暱"))
+                spritedic.Add("鏉戦暱", sprites[1]);
             //SetActive(true);
             dialogue.instance.SetCoversation(spritedic,text1, false);
             dialogueSO.onEventRaised += talkover;

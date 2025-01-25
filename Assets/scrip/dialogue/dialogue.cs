@@ -83,7 +83,12 @@ public class dialogue : MonoBehaviour
         page = 0;
         list = (sentences[page]).Split(new[] { ":", "：" }, StringSplitOptions.RemoveEmptyEntries);
         conversationTMP.text = list[1];
-        npcNameTMP.text = list[0];
+        string nametext = list[0];
+        if(nametext.Contains("[")){
+            nametext=nametext.Remove(list[0].IndexOf("["));
+        }
+        npcNameTMP.text=nametext;
+        Debug.Log(nametext);
         if (list[0] != " ") {
         
         image.sprite = sprites[list[0]];
@@ -107,6 +112,12 @@ public class dialogue : MonoBehaviour
         list = (sentences[page]).Split(new[] { ":", "：" }, StringSplitOptions.RemoveEmptyEntries);
         conversationTMP.text = list[1];
         npcNameTMP.text = list[0];
+        string nametext = list[0];
+        if(nametext.Contains("[")){
+            nametext=nametext.Remove(list[0].IndexOf("["));
+        }
+        npcNameTMP.text=nametext;
+
         if (list[0] != " ")
         {
 
@@ -131,7 +142,12 @@ public class dialogue : MonoBehaviour
 
             if (list[0] != "")
             {
-                npcNameTMP.text = list[0];
+                string nametext = list[0];
+                if(nametext.Contains("[")){
+                    nametext=nametext.Remove(list[0].IndexOf("["));
+                    }
+                 npcNameTMP.text=nametext;
+                
                 image.sprite = sprites[list[0]];
             }
             else {
