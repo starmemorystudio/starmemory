@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class firsttalk : MonoBehaviour
 {
@@ -17,6 +19,7 @@ public class firsttalk : MonoBehaviour
         InventoryManager.instance.transform.gameObject.SetActive(false);
         canvas=dialogue.instance.transform.gameObject;
         talk();
+
     }
     private void Awake()
     {
@@ -39,6 +42,7 @@ public class firsttalk : MonoBehaviour
         
     }
 
+
     private void talkover()
     {
        
@@ -46,6 +50,26 @@ public class firsttalk : MonoBehaviour
         // InventoryManager.instance.addItem(prefab);
         
         dialogueSO.onEventRaised -= talkover;
+        StartCoroutine(UnloadCurrentSceneAndLoadNew());
+
+    }
+
+    private IEnumerator UnloadCurrentSceneAndLoadNew()
+    {
+        // 获取当前活动场景
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        // 异步加载新场景（叠加模式）
+        // AsyncOperation loadOperation = SceneManager.LoadSceneAsync("MainScene", LoadSceneMode.Additive);
+        // yield return loadOperation;
+
+        // 设置新场景为活动场景
+        Scene newScene = SceneManager.GetSceneByName("MainScene");
+        SceneManager.SetActiveScene(newScene);
+
+        // 异步卸载旧场景
+        AsyncOperation unloadOperation = SceneManager.UnloadSceneAsync(currentScene);
+        yield return unloadOperation;
     }
 
     private void talk()
