@@ -8,7 +8,7 @@ public class Scenes : MonoBehaviour
 {
     void Awake()
     {
-        SceneManager.LoadScene("scene1",LoadSceneMode.Additive);
+        SceneManager.LoadScene("Assets/Scene/scene1.unity",LoadSceneMode.Additive);
     }
     // public SceneManager sceneManager;
     // Start is called before the first frame update
