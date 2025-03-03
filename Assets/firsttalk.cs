@@ -11,6 +11,7 @@ public class firsttalk : MonoBehaviour
     public InputControls controls1;
     public Dictionary<string, Sprite> spritedic;
     public SpriteList spriteList;
+    private GameObject player;
         [Multiline(20)]
     public string text1;
     // Start is called before the first frame update
@@ -18,6 +19,8 @@ public class firsttalk : MonoBehaviour
     {
         InventoryManager.instance.transform.gameObject.SetActive(false);
         canvas=dialogue.instance.transform.gameObject;
+        player =GameObject.FindWithTag("Player");
+        player.SetActive(false);
         talk();
 
     }
@@ -51,6 +54,8 @@ public class firsttalk : MonoBehaviour
         
         dialogueSO.onEventRaised -= talkover;
         StartCoroutine(UnloadCurrentSceneAndLoadNew());
+        player.SetActive(true);
+
 
     }
 
