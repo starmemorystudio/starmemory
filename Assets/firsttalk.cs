@@ -1,17 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class firsttalk : MonoBehaviour
 {
     public voidEventSO dialogueSO;
     public GameObject canvas;
+    public GameObject blackcanva;
     public InputControls controls1;
     public Dictionary<string, Sprite> spritedic;
     public SpriteList spriteList;
-    private GameObject player;
+    
+        private GameObject player;
         [Multiline(20)]
     public string text1;
     // Start is called before the first frame update
@@ -19,6 +24,8 @@ public class firsttalk : MonoBehaviour
     {
         InventoryManager.instance.transform.gameObject.SetActive(false);
         canvas=dialogue.instance.transform.gameObject;
+        blackcanva=GameObject.Find("black");
+        blackcanva.SetActive(false);
         player =GameObject.FindWithTag("Player");
         player.SetActive(false);
         talk();
@@ -29,6 +36,7 @@ public class firsttalk : MonoBehaviour
         spritedic = new Dictionary<string, Sprite>();
         spriteList=UnityEditor.AssetDatabase.LoadAssetAtPath<SpriteList>("Assets/setting/SpriteList.asset");
         spritedic=spriteList.spritedic;
+        // image=GameObject.Find("black").GetComponent<Image>();
         //controls1=new InputControls();
         //controls1.UI.talk.started += talk;
         //anim =npc1Sprite.GetComponent<Animator>();
@@ -42,7 +50,7 @@ public class firsttalk : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // timer -= Time.deltaTime;
     }
 
 
@@ -53,11 +61,15 @@ public class firsttalk : MonoBehaviour
         // InventoryManager.instance.addItem(prefab);
         
         dialogueSO.onEventRaised -= talkover;
+        
+        blackcanva.SetActive(true);
         StartCoroutine(UnloadCurrentSceneAndLoadNew());
         player.SetActive(true);
 
 
     }
+
+
 
     private IEnumerator UnloadCurrentSceneAndLoadNew()
     {

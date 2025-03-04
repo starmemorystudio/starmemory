@@ -6,6 +6,7 @@ TagManager:
   tags:
   - cantouch
   - inventory
+  - black
   layers:
   - Default
   - TransparentFX
