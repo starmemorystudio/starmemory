@@ -54,7 +54,7 @@ public class dialogue : MonoBehaviour
         {
             Destroy(instance);
         }
-
+        player=GameObject.FindWithTag("Player");
 
 
         playerController =  player.GetComponent<PlayerController>();

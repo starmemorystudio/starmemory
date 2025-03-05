@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     [Header("��������")]
     public float speed=290;
     public float jumpForce;
-    public GameObject died_img;
+    // public GameObject died_img;
     [Header("��¼����")]
     public int died_times=0; 
     // Start is called before the first frame update
@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
         
     }
     private void Wite() {
-        died_img.SetActive(false);
+        // died_img.SetActive(false);
     }
     private void FixedUpdate()
     {

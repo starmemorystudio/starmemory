@@ -12,6 +12,7 @@ public class firsttalk : MonoBehaviour
     public voidEventSO dialogueSO;
     public GameObject canvas;
     public GameObject blackcanva;
+    private GameObject inventorycanva;
     public InputControls controls1;
     public Dictionary<string, Sprite> spritedic;
     public SpriteList spriteList;
@@ -22,20 +23,25 @@ public class firsttalk : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InventoryManager.instance.transform.gameObject.SetActive(false);
+        // InventoryManager.instance.transform.gameObject.SetActive(false);
         canvas=dialogue.instance.transform.gameObject;
         blackcanva=GameObject.Find("black");
-        blackcanva.SetActive(false);
+        //blackcanva.SetActive(false);
         player =GameObject.FindWithTag("Player");
         player.SetActive(false);
         talk();
 
+    }
+    void OnEnable(){
+        
     }
     private void Awake()
     {
         spritedic = new Dictionary<string, Sprite>();
         spriteList=UnityEditor.AssetDatabase.LoadAssetAtPath<SpriteList>("Assets/setting/SpriteList.asset");
         spritedic=spriteList.spritedic;
+        inventorycanva=InventoryManager.instance.transform.gameObject;
+        inventorycanva.SetActive(false);
         // image=GameObject.Find("black").GetComponent<Image>();
         //controls1=new InputControls();
         //controls1.UI.talk.started += talk;
@@ -53,7 +59,7 @@ public class firsttalk : MonoBehaviour
         // timer -= Time.deltaTime;
     }
 
-
+public voidEventSO sceneloadoverSO; 
     private void talkover()
     {
        
@@ -62,17 +68,24 @@ public class firsttalk : MonoBehaviour
         
         dialogueSO.onEventRaised -= talkover;
         
-        blackcanva.SetActive(true);
-        StartCoroutine(UnloadCurrentSceneAndLoadNew());
-        player.SetActive(true);
+        sceneloadoverSO.onEventRaised+=unload;
+        
+        
+        Scenes.instance.LoadScenes("星空岭外");
+        
+        // Scenes.instance.LoadScenes("星空岭外");
+        //InventoryManager.instance.gameObject.SetActive(true);
 
 
     }
 
-
+    public void unload(){
+        StartCoroutine(UnloadCurrentSceneAndLoadNew());
+    }
 
     private IEnumerator UnloadCurrentSceneAndLoadNew()
     {
+        
         // 获取当前活动场景
         Scene currentScene = SceneManager.GetActiveScene();
 
@@ -81,11 +94,17 @@ public class firsttalk : MonoBehaviour
         // yield return loadOperation;
 
         // 设置新场景为活动场景
-        Scene newScene = SceneManager.GetSceneByName("MainScene");
-        SceneManager.SetActiveScene(newScene);
+        
+        //Scene newScene = SceneManager.GetSceneByName("星空岭外");
+        //SceneManager.SetActiveScene(newScene);
 
         // 异步卸载旧场景
         AsyncOperation unloadOperation = SceneManager.UnloadSceneAsync(currentScene);
+        player.SetActive(true);
+        inventorycanva.SetActive(true);
+        player.gameObject.transform.position=new Vector3(-10,-3,0);
+
+        sceneloadoverSO.onEventRaised-=unload;
         yield return unloadOperation;
     }
 
