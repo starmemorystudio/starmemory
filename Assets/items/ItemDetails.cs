@@ -13,5 +13,7 @@ public class ItemDetails
     
     public int itemId1;
     public int itemId2;
+
+    public Sprite sprite;
     
 }

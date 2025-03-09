@@ -14,20 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDetails:
   - id: 1001
-    name: "\u8BB0\u5FC6\u5B9D\u77F3"
-    description: "\u6211\u80FD\u611F\u53D7\u5230\u5B83\u4FDD\u5B58\u4E86\u6211\u6D41\u5931\u7684\u8BB0\u5FC6"
+    name: "\u6EE1\u6708\u77F3"
+    description: 
     itemType: 0
     itemId1: 0
     itemId2: 0
+    sprite: {fileID: 1150355635, guid: 45b8e375cde6c2747955c6bd737c40cc, type: 3}
   - id: 1002
-    name: "\u6751\u957F\u5927\u53D4\u7684\u5251"
+    name: "\u6B8B\u6708\u77F3"
     description: "\u8FD9\u628A\u5251\u662F\u6751\u957F\u5927\u53D4\u5E74\u8F7B\u65F6\u7684\u4F69\u5251"
-    itemType: 1
+    itemType: 0
     itemId1: 0
     itemId2: 0
+    sprite: {fileID: 233842124, guid: 45b8e375cde6c2747955c6bd737c40cc, type: 3}
   - id: 1003002
-    name: "\u653B\u51FB\u5B9D\u77F3"
+    name: "\u6714\u6708\u77F3"
     description: "\u91CC\u9762\u5145\u6EE1\u4E86\u72C2\u66B4\u7684\u80FD\u91CF"
-    itemType: 2
+    itemType: 0
     itemId1: 1001
     itemId2: 1002
+    sprite: {fileID: 956403733, guid: 45b8e375cde6c2747955c6bd737c40cc, type: 3}

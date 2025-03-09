@@ -59,6 +59,9 @@ MonoBehaviour:
     name: 
     description: 
     itemType: 0
+    itemId1: 0
+    itemId2: 0
+    sprite: {fileID: 0}
   itemList: {fileID: 11400000, guid: dd050151cf99e3045807c75bcd3777f5, type: 2}
   itemId: 1002
   isover: 0

@@ -8,6 +8,8 @@ TagManager:
   - inventory
   - black
   - bounds
+  - tilemap
+  - fire
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - Water
   - UI
   - ground
-  - 
+  - Player
   - 
   - 
   - 

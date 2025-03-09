@@ -15,7 +15,7 @@ using UnityEngine.Windows;
 public class Item : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField]
-    
+
     public SpriteRenderer spriteRenderer;
     //public UnityEvent<Item> getItem;
     public Sprite sprite;
@@ -26,90 +26,86 @@ public class Item : MonoBehaviour, IPointerClickHandler
     public bool isover;
     public GameObject descriptionPrefab;
 
-    public void OnPointDown()
+    public void OnPointerDown()
     {
-       // Debug.Log(this.itemDetail.description);
+        // Debug.Log(this.itemDetail.description);
     }
 
-    public void OnPointEnter(){
+    public void OnPointerEnter()
+    {
+        // Debug.Log("进来咯");
         transform.GetChild(0).gameObject.SetActive(true);
 
     }
-    public void OnPointExit(){
+    public void OnPointerExit()
+    {
         transform.GetChild(0).gameObject.SetActive(false);
-        
+
     }
-public GameObject LoadPrefabRuntime(string prefabName)
-{
-    GameObject prefab = Resources.Load<GameObject>(prefabName);
-    return prefab;
-}
+    public GameObject LoadPrefabRuntime(string prefabName)
+    {
+        GameObject prefab = Resources.Load<GameObject>(prefabName);
+        return prefab;
+    }
 
 
     private void Awake()
     {
 
-        
+
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        itemList = (SO_ItemList)AssetDatabase.LoadAssetAtPath<ScriptableObject>("Assets/items/so_ItemList.asset");
+        //itemList = (SO_ItemList)AssetDatabase.LoadAssetAtPath<ScriptableObject>("Assets/items/so_ItemList.asset");
         //挂载描述
-        
+
         //itemDescription.transform.localPosition=Vector3.zero;
-       
-        foreach (var itemdetail in itemList.itemDetails)
-        {
-            if (itemdetail.id == itemId)
-            {
-                itemDetail = itemdetail;
-            }
-        }
-         DescriptionInit();
+
+        itemDetail = itemList.itemDetails.Find(c => c.name == name);
+
     }
     private void Start()
     {
-
+        DescriptionInit();
     }
 
-    public void resolve(PointerEventData eventData){
-        
-        if(eventData.button==PointerEventData.InputButton.Right){
-        if(this.itemDetail.itemType==Enums.ItemType.component){
-        Transform olditem1=this.transform;
-        int id1=this.itemDetail.itemId1;
-        int id2=this.itemDetail.itemId2;
-        ItemDetails newItemDetail1=new ItemDetails();
-        ItemDetails newItemDetail2=new ItemDetails();
-        foreach (var itemdetail in olditem1.GetComponent<Item>().itemList.itemDetails)
-        {
-            if (itemdetail.id == id1)
-            {
-                newItemDetail1 = itemdetail;
-            }
-            else if (itemdetail.id == id2)
-            {
-                newItemDetail2 = itemdetail;
-            }
-        }
-        GameObject prefab1 = (GameObject)AssetDatabase.LoadAssetAtPath<GameObject>("Assets/items/Item/"+newItemDetail1.name+".prefab");
-        GameObject prefab2 = (GameObject)AssetDatabase.LoadAssetAtPath<GameObject>("Assets/items/Item/"+newItemDetail2.name+".prefab");
-        Destroy(olditem1.gameObject);
-        InventoryManager.instance.addItem(prefab1);
-        InventoryManager.instance.addItem(prefab2);
-        }else{
-            Debug.Log("该物品无法分解");
-        }
-    }
-    }
-    private void Update()
+    public void resolve(PointerEventData eventData)
     {
-        foreach (var itemdetail in itemList.itemDetails)
+
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
-            if (itemdetail.id == itemId)
+            if (this.itemDetail.itemType == Enums.ItemType.component)
             {
-                itemDetail = itemdetail;
+                Transform olditem1 = this.transform;
+                int id1 = this.itemDetail.itemId1;
+                int id2 = this.itemDetail.itemId2;
+                ItemDetails newItemDetail1 = new ItemDetails();
+                ItemDetails newItemDetail2 = new ItemDetails();
+                foreach (var itemdetail in olditem1.GetComponent<Item>().itemList.itemDetails)
+                {
+                    if (itemdetail.id == id1)
+                    {
+                        newItemDetail1 = itemdetail;
+                    }
+                    else if (itemdetail.id == id2)
+                    {
+                        newItemDetail2 = itemdetail;
+                    }
+                }
+                GameObject prefab1 = (GameObject)AssetDatabase.LoadAssetAtPath<GameObject>("Assets/items/Item/" + newItemDetail1.name + ".prefab");
+                GameObject prefab2 = (GameObject)AssetDatabase.LoadAssetAtPath<GameObject>("Assets/items/Item/" + newItemDetail2.name + ".prefab");
+                Destroy(olditem1.gameObject);
+                InventoryManager.instance.addItem(prefab1);
+                InventoryManager.instance.addItem(prefab2);
+            }
+            else
+            {
+                Debug.Log("该物品无法分解");
             }
         }
+    }
+    void Update()
+    {
+        itemDetail=itemList.itemDetails.Find(c=>c.name==name);
 
         // if(GetComponentInChildren<RectTransform>()){
         //     RectTransform rect=transform.GetChild(0).GetComponent<RectTransform>();
@@ -119,22 +115,24 @@ public GameObject LoadPrefabRuntime(string prefabName)
     }
     public void Init(int ItemIdParm)
     {
-      
+
     }
-Vector3 tWorldPos;
+    Vector3 tWorldPos;
 
     private Vector3 offset;
 
-    private void  DescriptionInit(){
-        itemDescription =Instantiate(descriptionPrefab);
-        List<GameObject> Description =new List<GameObject>();
-        for(int i=0;i<3;i++)Description.Add(itemDescription.transform.GetChild(i).gameObject);
-        Description[1].GetComponent <TextMeshProUGUI>().text=itemDetail.name;
-        Description[2].GetComponent<TextMeshProUGUI>().text=itemDetail.description;
+    private void DescriptionInit()
+    {
+        itemDescription = Instantiate(descriptionPrefab);
+        List<GameObject> Description = new List<GameObject>();
+        for (int i = 0; i < 3; i++) Description.Add(itemDescription.transform.GetChild(i).gameObject);
+        // Debug.Log(itemDetail);
+        Description[1].GetComponent<TextMeshProUGUI>().text = itemDetail.name;
+        Description[2].GetComponent<TextMeshProUGUI>().text = itemDetail.description;
         itemDescription.transform.SetParent(this.transform);
 
-        RectTransform rect=transform.GetChild(0).GetComponent<RectTransform>();
-        rect.localPosition=new Vector3(0,-270,0);
+        RectTransform rect = transform.GetChild(0).GetComponent<RectTransform>();
+        rect.localPosition = new Vector3(0, -270, 0);
         rect.transform.gameObject.SetActive(false);
 
     }

@@ -51,7 +51,7 @@ public class UIOptionDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             // sortcache=m_rt.GetComponent<Canvas>().sortingOrder;
             // m_rt.GetComponent<Canvas>().sortingOrder=100;
             
-            m_rt.SetParent(TargetLocations[7]);
+            m_rt.SetParent(transform.parent.parent.GetChild(8));
             //m_rt.gameObject.layer=LayerMask.NameToLayer("ground");
         // if (eventData.button == PointerEventData.InputButton.Left)
             m_rt.position = Input.mousePosition + m_offset;

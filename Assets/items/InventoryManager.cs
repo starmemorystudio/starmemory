@@ -53,6 +53,8 @@ public class InventoryManager : MonoBehaviour
         
         
         GameObject itemnew = Instantiate(prefab);
+        itemnew.name=prefab.name;
+        itemnew.GetComponent<Item>().itemDetail=prefab.GetComponent<Item>().itemDetail;
         itemnew.transform.SetParent(items[itemNum].transform);
 
 
@@ -136,16 +138,18 @@ public class InventoryManager : MonoBehaviour
     void Update()
     {
         
-
+            
             thisobject = items[index];
 
         
         
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 8; i++){
             
             items[i].transform.GetChild(0).transform.gameObject.SetActive((i == index)&&items[i].GetComponentInChildren<Item>() );
-
-        
+            if(items[i].transform.childCount>1&&items[index].transform.childCount==1){
+                    index=i;
+            }
+        }
         
         
     }

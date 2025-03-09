@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
         }
         InventoryManager.instance.index%=8;
         number++;
+        if(number>8)break;
         }
         while(!InventoryManager.instance.items[InventoryManager.instance.index].GetComponentInChildren<Item>()||number>8);
     }
