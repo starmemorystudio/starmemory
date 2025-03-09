@@ -114,15 +114,15 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Vector3 vector3 = new Vector3(15,-170,0);
-        vector3.y = -5;
+        Vector3 vector3 = new Vector3(-6,-2,0);
+        // vector3.y = -5;
         
         if (transform.position.y < -100)
         {
             //died_img.SetActive(true);
             transform.position = vector3;
             died_times += 1;
-            Invoke("Wite", 3f);
+            // Invoke("Wite", 3f);
             
         }
         Move();

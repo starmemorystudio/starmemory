@@ -38,7 +38,7 @@ public class Scenes : MonoBehaviour
         
         LoadScenes("scene1");
 // player.SetActive(false);
-        // player.transform.position=GameObject.FindWithTag("fire").transform.position;
+        player.transform.position=GameObject.FindWithTag("fire").transform.position;
 
     }
 
